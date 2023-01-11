@@ -19,7 +19,10 @@
  * This may need to be greater than __NR_last_syscall+1 in order to
  * account for the padding in the syscall table
  */
+#define __NR_getrandom			(__NR_SYSCALL_BASE+384)
+#define __NR_memfd_create		(__NR_SYSCALL_BASE+385)
 #define __NR_syscalls  (388)
+#define __NR_compat_syscalls		386
 
 /*
  * *NOTE*: This is a ghost syscall private to the kernel.  Only the
@@ -52,6 +55,16 @@
 #define __ARCH_WANT_SYS_FORK
 #define __ARCH_WANT_SYS_VFORK
 #define __ARCH_WANT_SYS_CLONE
+
+/*
+ * This may need to be greater than __NR_last_syscall+1 in order to
+ * account for the padding in the syscall table
+ */
+#ifdef __KERNEL__
+#define __NR_syscalls  (388)
+#endif
+
+
 
 /*
  * Unimplemented (or alternatively implemented) syscalls
